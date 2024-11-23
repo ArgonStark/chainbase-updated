@@ -107,7 +107,9 @@ echo -e "${YELLOW}Have you created a metadata file on GitHub? (yes/no)${NC}"
 read -rp "Answer: " metadata
 if [ "$metadata" == "yes" ]; then
     echo -e "${YELLOW}Edit the operator.yaml file to include your metadata URL.${NC}"
-    nano /root/chainbase-avs-setup/holesky/operator.yaml
+    echo -e "${YELLOW}Adding metadata URL to operator.yaml...${NC}"
+read -rp "Enter your metadata URL: "metadata_url"
+sed -i "s|metadata_url:.*|metadata_url: $metadata_url|" /root/chainbase-avs-setup/holesky/operator.yaml
 fi
 
 eigenlayer operator register operator.yaml
@@ -132,8 +134,6 @@ OPERATOR_ADDRESS=$OPERATOR_ADDRESS
 NODE_SOCKET=$NODE_SOCKET
 OPERATOR_NAME=$OPERATOR_NAME
 EOT
-
-nano .env
 
 echo -e "${BLUE}Starting the node...${NC}"
 chmod +x ./chainbase-avs.sh
