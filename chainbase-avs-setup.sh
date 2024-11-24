@@ -108,7 +108,7 @@ read -rp "Answer: " metadata
 if [ "$metadata" == "yes" ]; then
     echo -e "${YELLOW}Edit the operator.yaml file to include your metadata URL.${NC}"
     echo -e "${YELLOW}Adding metadata URL to operator.yaml...${NC}"
-read -rp "Enter your metadata URL: "metadata_url"
+read -rp "Enter your metadata URL: "metadata_url
 sed -i "s|metadata_url:.*|metadata_url: $metadata_url|" /root/chainbase-avs-setup/holesky/operator.yaml
 fi
 
