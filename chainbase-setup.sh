@@ -103,14 +103,10 @@ fi
 echo -e "${BLUE}Registering the operator...${NC}"
 eigenlayer operator config create
 
-echo -e "${YELLOW}Have you created a metadata file on GitHub? (yes/no)${NC}"
-read -rp "Answer: " metadata
-if [ "$metadata" == "yes" ]; then
-    echo -e "${YELLOW}Edit the operator.yaml file to include your metadata URL.${NC}"
-    echo -e "${YELLOW}Adding metadata URL to operator.yaml...${NC}"
-read -rp "Enter your metadata URL: "metadata_url
-sed -i "s|metadata_url:.*|metadata_url: $metadata_url|" /root/chainbase-avs-setup/holesky/operator.yaml
-fi
+# Upload metadata file to GitHub and edit operator.yaml
+echo -e "${YELLOW}Upload the metadata file to your GitHub profile and provide the link:${NC}"
+read -p "GitHub Metadata URL: " metadata_url
+sed -i "s|metadata_url:.*|metadata_url: \"$metadata_url\"|" operator.yaml
 
 eigenlayer operator register operator.yaml
 
