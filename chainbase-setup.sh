@@ -131,6 +131,26 @@ NODE_SOCKET=$NODE_SOCKET
 OPERATOR_NAME=$OPERATOR_NAME
 EOT
 
+# Prompt user to select the port for Grafana or use the default (3010)
+echo -e "${YELLOW}Enter the port you want Grafana to run on (default is 3010):${NC}"
+read -rp "Port: " GRAFANA_PORT
+
+# Use default port 3010 if no custom port is provided
+if [ -z "$GRAFANA_PORT" ]; then
+    GRAFANA_PORT=3010
+fi
+echo -e "${GREEN}Using port $GRAFANA_PORT for Grafana.${NC}"
+
+# Update docker-compose.yml with the selected port for Grafana
+if [ -f "docker-compose.yml" ]; then
+    sed -i "s|3010:3000|$GRAFANA_PORT:3000|" docker-compose.yml
+    echo -e "${GREEN}Updated docker-compose.yml to use port $GRAFANA_PORT for Grafana.${NC}"
+else
+    echo -e "${RED}Error: docker-compose.yml file not found!${NC}"
+    exit 1
+fi
+
+
 echo -e "${BLUE}Starting the node...${NC}"
 chmod +x ./chainbase-avs.sh
 ./chainbase-avs.sh register
