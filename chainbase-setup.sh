@@ -151,6 +151,8 @@ else
 fi
 
 
+systemctl start docker
+
 echo -e "${BLUE}Starting the node...${NC}"
 chmod +x ./chainbase-avs.sh
 ./chainbase-avs.sh register
