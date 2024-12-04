@@ -141,12 +141,12 @@ if [ -z "$GRAFANA_PORT" ]; then
 fi
 echo -e "${GREEN}Using port $GRAFANA_PORT for Grafana.${NC}"
 
-# Update docker-compose.yml with the selected port for Grafana
-if [ -f "/root/chainbase-avs-setup/holesky/docker-compose.yml" ]; then
-    sed -i "s|3010:3000|$GRAFANA_PORT:3000|" docker-compose.yml
+# Update docker-compose.yaml with the selected port for Grafana
+if [ -f "/root/chainbase-avs-setup/holesky/docker-compose.yaml" ]; then
+    sed -i "s|3010:3000|$GRAFANA_PORT:3000|" docker-compose.yaml
     echo -e "${GREEN}Updated docker-compose.yml to use port $GRAFANA_PORT for Grafana.${NC}"
 else
-    echo -e "${RED}Error: docker-compose.yml file not found!${NC}"
+    echo -e "${RED}Error: docker-compose.yaml file not found!${NC}"
     exit 1
 fi
 
