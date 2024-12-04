@@ -155,5 +155,10 @@ systemctl start docker
 
 echo -e "${BLUE}Starting the node...${NC}"
 chmod +x ./chainbase-avs.sh
+echo -e "${GREEN}Registering AVS${NC}"
 ./chainbase-avs.sh register
+
+sleep 3
+
+echo -e "${GREEN}Running Chainbase AVS${NC}"
 ./chainbase-avs.sh run
